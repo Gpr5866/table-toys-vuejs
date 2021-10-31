@@ -17,11 +17,15 @@
                         <b-card-group deck>
                             <b-card bg-variant="dark" v-for="(itemgrup, index) in listgroup" :value="itemgrup.id" :key="itemgrup.id" :title="itemgrup.grup" class="text-center">
                                 <b-card-text class="groupcard">{{itemgrup.grup}} - ID: {{itemgrup.id}} - Jumlah Player : {{itemgrup.jumlahplayer}}</b-card-text>
+                                <p>List Pemain</p>
+                                <p v-for="playername in listplayer" :value="playername.id" :key="playername.id">
+                                {{playername.playeruser}}
+                                </p>
                                 <b-row>
                                     <b-col>
                                         <div>
                                             <b-button pill variant="outline-light" class="btn-choice" @click="$bvModal.show('modalPlayer')">Tambah Player</b-button>
-                                            <b-modal id="modalPlayer" title="List Player" ok-only>
+                                            <b-modal id="modalPlayer" title="List Player" ok-only class="modalbubble">
                                                  <div class="modalcontent">
                                                     <h1 class="span-default">List Player</h1>
                                                         <select class="form-control" @change="changePlayer($event)">
@@ -72,6 +76,10 @@ export default {
                     {grup: 'grup 1', id:1 , jumlahplayer: 2, player: []},
                     {grup: 'grup 2', id:2 , jumlahplayer: 3, player: []},
                 ],
+                listplayer: [
+                    {playeruser: 'player 1'},
+                    {playeruser: 'player 2'}
+                ],
                 grup:'',
                 nextId: 3,
                 jumlahPlayer:0,
@@ -101,8 +109,8 @@ export default {
                 this.selectedPlayer = event.target.options[event.target.options.selectedIndex].text
             },
             submit() {
-                this.listgroup.push({
-                    player: ['player 1', 'player 2']
+                this.listplayer.push({
+                    playeruser: this.selectedPlayer
                 })
             }
         }
@@ -167,6 +175,9 @@ export default {
     color: #99A799
 }
 .modalcontent{
+    background-color: #082032;
+}
+.modalbubble{
     background-color: #082032;
 }
 </style>
