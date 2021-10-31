@@ -25,7 +25,7 @@
                                     <b-col>
                                         <div>
                                             <b-button pill variant="outline-light" class="btn-choice" @click="$bvModal.show('modalPlayer')">Tambah Player</b-button>
-                                            <b-modal id="modalPlayer" title="List Player" ok-only class="modalbubble">
+                                            <b-modal id="modalPlayer" title="List Player" ok-only busy modal-class="modalbubble" content-class="modalcontent" hide-header-close>
                                                  <div class="modalcontent">
                                                     <h1 class="span-default">List Player</h1>
                                                         <select class="form-control" @change="changePlayer($event)">
@@ -111,7 +111,7 @@ export default {
             submit() {
                 this.listplayer.push({
                     playeruser: this.selectedPlayer
-                })
+                });
             }
         }
     }
@@ -165,19 +165,22 @@ export default {
     display: flex;
     margin: 1em; 
     width: 75%;
+    background-color: #082032;
+    color: lightcyan; 
 }
 .btn-submit {
     margin: 1em;
     padding: 10px;
 }
 .span-default{
-    margin:1em;
-    color: #99A799
+    margin:10px;
+    color: #99A799;
 }
-.modalcontent{
+/deep/ .modalcontent{
     background-color: #082032;
 }
-.modalbubble{
+ /deep/ .modalbubble > .modal-dialog > .modal-content > .modal-header {
     background-color: #082032;
+    color: lightcyan;
 }
 </style>
